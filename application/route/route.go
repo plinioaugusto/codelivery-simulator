@@ -77,7 +77,7 @@ func (route *Route) ExportJsonPositions() ([]string, error) {
 			partialRoute.Finished = true
 		}
 
-		jsonRoute, error := json.Marshal(route)
+		jsonRoute, error := json.Marshal(partialRoute)
 
 		if error != nil {
 			return nil, error
