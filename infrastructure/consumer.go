@@ -19,7 +19,7 @@ func NewKafkaConsumer(messageChannel chan *confluentKafka.Message) *KafkaConsume
 		MessageChannel: messageChannel,
 	}
 }
-func (k *KafkaConsumer) Consume() {
+func (kafkaConsumer *KafkaConsumer) Consume() {
 	configMap := &confluentKafka.ConfigMap{
 		"bootstrap.servers": os.Getenv("KafkaBootstrapServers"),
 		"group.id":          os.Getenv("KafkaConsumerGroupId"),
@@ -41,7 +41,7 @@ func (k *KafkaConsumer) Consume() {
 	for {
 		message, error := confluentKafka.ReadMessage(-1)
 		if error == nil {
-			k.MessageChannel <- message
+			kafkaConsumer.MessageChannel <- message
 		}
 	}
 }
